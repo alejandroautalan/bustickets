@@ -28,6 +28,7 @@ final class ModeloAdmin extends AbstractAdmin
             ->add('id')
             ->add('nombre')
             ->add('version')
+            ->add('marca')
             ->add('activo')
             ->add(ListMapper::NAME_ACTIONS, null, [
                 'actions' => [
@@ -44,6 +45,7 @@ final class ModeloAdmin extends AbstractAdmin
             #->add('id')
             ->add('nombre')
             ->add('version')
+            ->add('marca')
             ->add('activo')
         ;
     }
@@ -54,6 +56,7 @@ final class ModeloAdmin extends AbstractAdmin
             ->add('id')
             ->add('nombre')
             ->add('version')
+            ->add('marca')
             ->add('activo')
         ;
     }

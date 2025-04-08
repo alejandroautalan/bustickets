@@ -31,6 +31,7 @@ final class ColectivoAdmin extends AbstractAdmin
             ->add('id')
             ->add('nombre')
             ->add('patente')
+            ->add('modelo')
             ->add('activo')
             ->add(ListMapper::NAME_ACTIONS, null, [
                 'actions' => [
@@ -47,6 +48,7 @@ final class ColectivoAdmin extends AbstractAdmin
             #->add('id')
             ->add('nombre')
             ->add('patente')
+            ->add('modelo')
             ->add('activo')
         ;
     }
@@ -57,6 +59,7 @@ final class ColectivoAdmin extends AbstractAdmin
             ->add('id')
             ->add('nombre')
             ->add('patente')
+            ->add('modelo')
             ->add('activo')
         ;
     }
