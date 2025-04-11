@@ -28,6 +28,8 @@ services:
         class: App\Admin\ColectivoAdmin
         tags:
             - { name: sonata.admin, model_class: App\Entity\Colectivo, controller: App\Controller\ColectivoAdminController, manager_type: orm, group: admin, label: Colectivo }
+        calls:
+          - [addChild, ['@admin.asiento']]
 
     admin.modelo:
         class: App\Admin\ModeloAdmin
