@@ -61,7 +61,7 @@ services:
         tags:
             - { name: sonata.admin, model_class: App\Entity\Viaje, controller: App\Controller\ViajeAdminController, manager_type: orm, group: admin, label: Viaje }
         calls:
-            - [ addChild, [ "@admin.pasaje" ] ]
+            - [ addChild, [ "@admin.pasaje", 'viaje' ] ]
 
     admin.pago:
         class: App\Admin\PagoAdmin
