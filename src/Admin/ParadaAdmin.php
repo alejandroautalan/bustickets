@@ -15,14 +15,13 @@ use Sonata\AdminBundle\Admin\AdminInterface;
 use Knp\Menu\ItemInterface as MenuItemInterface;
 
 
-final class MarcaAdmin extends AbstractAdmin
+final class ParadaAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
             ->add('id')
             ->add('nombre')
-            ->add('descripcion')
         ;
     }
 
@@ -31,7 +30,6 @@ final class MarcaAdmin extends AbstractAdmin
         $list
             ->add('id')
             ->add('nombre')
-            ->add('descripcion')
             ->add(ListMapper::NAME_ACTIONS, null, [
                 'actions' => [
                     'show' => [],
@@ -46,8 +44,12 @@ final class MarcaAdmin extends AbstractAdmin
         $form
             #->add('id')
             ->add('nombre')
-            ->add('descripcion')
         ;
+        if(!$this->isChild()) {
+            $form->add('provincia')
+                ->add('ciudad')
+                ;
+        }
     }
 
     protected function configureShowFields(ShowMapper $show): void
@@ -55,21 +57,17 @@ final class MarcaAdmin extends AbstractAdmin
         $show
             ->add('id')
             ->add('nombre')
-            ->add('descripcion')
         ;
     }
 
-    protected function configureTabMenu(MenuItemInterface $menu, string $action, ?AdminInterface $childAdmin = null): void
-    {
-        if (!$childAdmin && !in_array($action, ['edit', 'show'])) {
-            return;
-        }
-
-        $admin = $this->isChild() ? $this->getParent() : $this;
-        $id = $admin->getRequest()->get('id');
-
-        if ($this->isGranted('LIST')) {
-            $menu->addChild('Marcas', $admin->generateMenuUrl('admin.modelo.list', ['id' => $id]));
-        }
-    }
+    // protected function configureRoutes(RouteCollectionInterface $collection): void
+    // {
+    //     if ($this->isChild()) {
+    //         return;
+    //     }
+    //
+    //     // This is the route configuration as a parent
+    //     $collection->clear();
+    //
+    // }
 }

@@ -10,20 +10,26 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-use Sonata\AdminBundle\Route\RouteCollectionInterface;
-use Sonata\AdminBundle\Admin\AdminInterface;
-use Knp\Menu\ItemInterface as MenuItemInterface;
+use App\Entity\Vehiculo;
 
 
-final class MarcaAdmin extends AbstractAdmin
+final class VehiculoAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
             ->add('id')
             ->add('nombre')
-            ->add('descripcion')
+            ->add('placa')
+            ->add('is_active')
         ;
+    }
+
+    public function toString(object $object): string
+    {
+        return $object instanceof Vehiculo
+        ? 'Vehículo'.$object->getNombre()
+        : 'Vehículo'; // shown in the breadcrumb on the create view
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -31,7 +37,8 @@ final class MarcaAdmin extends AbstractAdmin
         $list
             ->add('id')
             ->add('nombre')
-            ->add('descripcion')
+            ->add('placa')
+            ->add('is_active')
             ->add(ListMapper::NAME_ACTIONS, null, [
                 'actions' => [
                     'show' => [],
@@ -46,7 +53,9 @@ final class MarcaAdmin extends AbstractAdmin
         $form
             #->add('id')
             ->add('nombre')
-            ->add('descripcion')
+            ->add('placa')
+            ->add('transporte')
+            ->add('is_active')
         ;
     }
 
@@ -55,21 +64,8 @@ final class MarcaAdmin extends AbstractAdmin
         $show
             ->add('id')
             ->add('nombre')
-            ->add('descripcion')
+            ->add('placa')
+            ->add('is_active')
         ;
-    }
-
-    protected function configureTabMenu(MenuItemInterface $menu, string $action, ?AdminInterface $childAdmin = null): void
-    {
-        if (!$childAdmin && !in_array($action, ['edit', 'show'])) {
-            return;
-        }
-
-        $admin = $this->isChild() ? $this->getParent() : $this;
-        $id = $admin->getRequest()->get('id');
-
-        if ($this->isGranted('LIST')) {
-            $menu->addChild('Marcas', $admin->generateMenuUrl('admin.modelo.list', ['id' => $id]));
-        }
     }
 }

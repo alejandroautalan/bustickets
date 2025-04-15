@@ -15,14 +15,14 @@ use Sonata\AdminBundle\Admin\AdminInterface;
 use Knp\Menu\ItemInterface as MenuItemInterface;
 
 
-final class MarcaAdmin extends AbstractAdmin
+final class TransporteAdmin extends AbstractAdmin
 {
     protected function configureDatagridFilters(DatagridMapper $filter): void
     {
         $filter
             ->add('id')
             ->add('nombre')
-            ->add('descripcion')
+            ->add('nro_asientos')
         ;
     }
 
@@ -31,7 +31,7 @@ final class MarcaAdmin extends AbstractAdmin
         $list
             ->add('id')
             ->add('nombre')
-            ->add('descripcion')
+            ->add('nro_asientos')
             ->add(ListMapper::NAME_ACTIONS, null, [
                 'actions' => [
                     'show' => [],
@@ -46,7 +46,7 @@ final class MarcaAdmin extends AbstractAdmin
         $form
             #->add('id')
             ->add('nombre')
-            ->add('descripcion')
+            ->add('nro_asientos')
         ;
     }
 
@@ -55,7 +55,7 @@ final class MarcaAdmin extends AbstractAdmin
         $show
             ->add('id')
             ->add('nombre')
-            ->add('descripcion')
+            ->add('nro_asientos')
         ;
     }
 
@@ -69,7 +69,7 @@ final class MarcaAdmin extends AbstractAdmin
         $id = $admin->getRequest()->get('id');
 
         if ($this->isGranted('LIST')) {
-            $menu->addChild('Marcas', $admin->generateMenuUrl('admin.modelo.list', ['id' => $id]));
+            $menu->addChild('Asientos', $admin->generateMenuUrl('admin.transporte_asiento.list', ['id' => $id]));
         }
     }
 }

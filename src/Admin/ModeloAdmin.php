@@ -39,15 +39,26 @@ final class ModeloAdmin extends AbstractAdmin
             ]);
     }
 
+    protected function createNewInstance(): object {
+        $object = parent::createNewInstance();
+
+        $object->setVersion("1");
+
+        return $object;
+    }
+
     protected function configureFormFields(FormMapper $form): void
     {
         $form
             #->add('id')
             ->add('nombre')
-            ->add('version')
-            ->add('marca')
+            #->add('version')
             ->add('activo')
         ;
+        if(!$this->isChild()) {
+            $form->add('marca')
+            ;
+        }
     }
 
     protected function configureShowFields(ShowMapper $show): void
